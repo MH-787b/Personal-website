@@ -1,0 +1,475 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max Hulme | Systems &amp; Engineering</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: #e5e5e5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Custom Grid Pattern */
+        .grid-bg {
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Animation Utilities */
+        .animate-on-scroll { 
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-on-scroll.visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        /* Beam Animations */
+        .beam-border-v {
+            position: absolute;
+            top: 0; bottom: 0; left: 0;
+            width: 1px;
+            background: rgba(255,255,255,0.05);
+            overflow: hidden;
+            z-index: 10;
+        }
+        .beam-border-v::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(to bottom, transparent, #FACC15, transparent);
+            transform: translateY(-100%);
+            animation: beam-drop 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            opacity: 0.6;
+        }
+
+        .beam-border-h {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
+            background: rgba(255,255,255,0.05);
+            overflow: hidden;
+            z-index: 10;
+        }
+        .beam-border-h::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(to right, transparent, #FACC15, transparent);
+            transform: translateX(-100%);
+            animation: beam-slide 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            animation-delay: 1s;
+            opacity: 0.6;
+        }
+
+        @keyframes beam-drop {
+            0% { transform: translateY(-100%); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+        @keyframes beam-slide {
+            0% { transform: translateX(-100%); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Utilities */
+        .tracking-tightest { letter-spacing: -0.04em; }
+        .text-balance { text-wrap: balance; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
+  <script src="https://www.aura.build/FxFilter.js"></script>
+<link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style></head>
+<body class="overflow-x-hidden selection:bg-[#FACC15] selection:text-black">
+
+
+
+
+
+
+
+
+
+
+<!-- Background (component) added by Aura -->
+<div class="aura-background-component fixed top-0 w-full h-screen -z-10 brightness-75" data-alpha-mask="80" style="; mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 0%, black 80%, transparent)"><div class="spline-container absolute top-0 left-0 w-full h-full z-0"><iframe src="https://my.spline.design/glowingplanetparticles-HmCVKutonlFn3Oqqe6DI9nWi/" frameborder="0" width="100%" height="100%"></iframe></div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Background Grid -->
+    <div class="fixed inset-0 grid-bg pointer-events-none z-0 mask-image-b-gradient"></div>
+    <div class="fixed inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505] pointer-events-none z-0"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 bg-[#050505]/80 backdrop-blur-md transition-all duration-300">
+        <div class="max-w-screen-xl mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="text-sm font-semibold tracking-tighter text-white hover:text-[#FACC15] transition-colors uppercase">
+                MH
+            </a>
+            
+            <!-- Links -->
+            <div class="flex items-center gap-8">
+                <a href="#projects" class="text-xs font-medium text-neutral-400 hover:text-white transition-colors uppercase tracking-wide">Projects</a>
+                <a href="#contact" class="text-xs font-medium text-neutral-400 hover:text-white transition-colors uppercase tracking-wide">Contact</a>
+            </div>
+        </div>
+        <!-- Horizontal Beam -->
+        <div class="beam-border-h" style="bottom: -1px;"></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col md:px-12 z-10 max-w-screen-xl mr-auto ml-auto pt-20 pr-6 pl-6 relative items-start justify-center">
+        <div class="beam-border-v" style="left: 24px;"></div>
+        
+        <div class="animate-on-scroll space-y-8 max-w-3xl visible">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-widest text-[#FACC15]">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#FACC15] animate-pulse"></span>
+                Available for Projects
+            </div>
+
+            <h1 class="md:text-8xl leading-[0.9] text-6xl font-semibold text-white tracking-tighter">
+                MAX<br class="">HULME
+            </h1>
+            
+            <p class="md:text-xl leading-relaxed text-balance text-lg font-light text-neutral-400 max-w-lg">Building practical systems that connect code, automation and hardware.</p>
+
+            <div class="flex flex-wrap gap-4 pt-4">
+                <a href="#projects" class="group relative px-6 py-3 bg-[#FACC15] text-black text-sm font-semibold tracking-wide overflow-hidden transition-transform active:scale-95 hover:scale-105">
+                    <span class="z-10 flex items-center gap-2 relative">
+                        View Projects
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-down-right" class="lucide lucide-arrow-down-right w-4 h-4 stroke-[1.5]"><path d="m7 7 10 10"></path><path d="M17 7v10H7"></path></svg>
+                    </span>
+                </a>
+                <a href="#contact" class="group px-6 py-3 border border-white/20 text-white text-sm font-medium tracking-wide hover:bg-white/5 transition-colors flex items-center gap-2">
+                    Contact
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="bg-center bg-blue-800 opacity-100 bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/6900989a-3c95-4883-821c-5564f87fb82e_1600w.png)] z-10 border-neutral-950/5 border-t pt-24 pb-24 relative shadow blur-none backdrop-blur-lg">
+        <div class="md:px-12 grid grid-cols-1 md:grid-cols-12 md:gap-24 max-w-screen-xl mr-auto ml-auto pr-6 pl-6 gap-x-12 gap-y-12 items-start">
+            <div class="md:col-span-4 animate-on-scroll">
+                <span class="text-xs font-medium text-[#FACC15] uppercase tracking-widest mb-4 block">About</span>
+                <h2 class="md:text-4xl text-3xl font-medium text-white tracking-tight mb-6">
+                    EngineeringReality
+                </h2>
+            </div>
+            <div class="md:col-span-8 animate-on-scroll delay-100 border-neutral-50">
+                <p class="leading-relaxed text-balance text-lg font-light text-slate-50 mb-8">I’m Max, a student in London studying Maths, Further Maths, Physics and Design Engineering. I’m interested in robotics, automation and computer vision, and I like building things that actually work in the real world. I enjoy combining code, hardware and 3D printing to prototype ideas quickly.</p>
+                
+                <!-- Stylized Graphic Placeholder (Abstract Hardware) -->
+                <div class="w-full h-64 border border-white/10 bg-white/5 relative overflow-hidden group">
+                    <div class="grid-bg opacity-50 absolute top-0 right-0 bottom-0 left-0"></div>
+                    <!-- Decorative Elements simulating a schematic -->
+                    <div class="-translate-x-1/2 -translate-y-1/2 flex w-32 h-32 border-[#FACC15]/30 border rounded-full absolute top-1/2 left-1/2 items-center justify-center">
+                        <div class="w-24 h-24 border border-white/10 rotate-45"></div>
+                    </div>
+                    <div class="absolute bottom-4 left-6 text-[10px] font-mono text-neutral-500 uppercase">
+                        System Status: Nominal
+                        X: 102.4 | Y: 44.2
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="cpu" class="lucide lucide-cpu absolute top-6 right-6 text-neutral-600 w-6 h-6 stroke-[1]"><path d="M12 20v2"></path><path d="M12 2v2"></path><path d="M17 20v2"></path><path d="M17 2v2"></path><path d="M2 12h2"></path><path d="M2 17h2"></path><path d="M2 7h2"></path><path d="M20 12h2"></path><path d="M20 17h2"></path><path d="M20 7h2"></path><path d="M7 20v2"></path><path d="M7 2v2"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="8" y="8" width="8" height="8" rx="1"></rect></svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="z-10 border-white/5 border-t pt-24 pb-24 relative">
+        <div class="md:px-12 max-w-screen-xl mr-auto ml-auto pr-6 pl-6">
+            <div class="mb-16 animate-on-scroll">
+                <h2 class="text-2xl font-medium text-white tracking-tight">Skills</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10 animate-on-scroll delay-100">
+                <!-- Development -->
+                <div class="group hover:bg-[#0A0A0A] transition-colors bg-[#080808] pt-8 pr-8 pb-8 pl-8">
+                    <div class="w-10 h-10 rounded bg-white/5 flex items-center justify-center mb-6 text-[#FACC15]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="code-2" class="lucide lucide-code-2 w-5 h-5 stroke-[1.5]"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-white mb-3">Development</h3>
+                    <p class="leading-relaxed text-sm font-light text-neutral-400">
+                        Python, JavaScript, APIs, basic backend and deployment
+                    </p>
+                </div>
+
+                <!-- Automation -->
+                <div class="bg-[#080808] p-8 group hover:bg-[#0A0A0A] transition-colors">
+                    <div class="w-10 h-10 rounded bg-white/5 flex items-center justify-center mb-6 text-[#FACC15]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="workflow" class="lucide lucide-workflow w-5 h-5 stroke-[1.5]"><rect width="8" height="8" x="3" y="3" rx="2"></rect><path d="M7 11v4a2 2 0 0 0 2 2h4"></path><rect width="8" height="8" x="13" y="13" rx="2"></rect></svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-white mb-3">Automation &amp; Systems</h3>
+                    <p class="text-sm text-neutral-400 font-light leading-relaxed">
+                        n8n workflows, Docker, VPS hosting, FFmpeg, AI-assisted tools
+                    </p>
+                </div>
+
+                <!-- Robotics -->
+                <div class="group hover:bg-[#0A0A0A] transition-colors bg-[#080808] pt-8 pr-8 pb-8 pl-8">
+                    <div class="w-10 h-10 rounded bg-white/5 flex items-center justify-center mb-6 text-[#FACC15]">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bot" class="lucide lucide-bot w-5 h-5 stroke-[1.5]"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-white mb-3">Robotics &amp; Engineering</h3>
+                    <p class="text-sm text-neutral-400 font-light leading-relaxed">
+                        Robotics, computer vision prototypes, 3D printing, physical prototyping
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="bg-gradient-to-br from-white/10 via-white/0 to-white/10 z-10 border-white/5 border-t pt-24 pb-24 relative" id="projects">
+        <div class="md:px-12 max-w-screen-xl mr-auto ml-auto pr-6 pl-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 animate-on-scroll">
+                <h2 class="text-4xl font-medium text-white tracking-tight">Projects</h2>
+                <span class="text-sm text-neutral-500 font-mono">SELECTED WORKS 2023-2024</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-on-scroll gap-x-8 gap-y-8">
+                
+                <!-- Project 1 -->
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-[16/9] bg-[#111] border border-white/10 overflow-hidden mb-6">
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <!-- Placeholder Visualization -->
+                        <div class="flex bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/bc7d21bf-f51c-4847-9c48-3cf0aea27a34_1600w.png)] bg-cover bg-center absolute top-0 right-0 bottom-0 left-0 items-center justify-center">
+                            <div class="w-[80%] h-[1px] bg-white/10 relative">
+                                <div class="absolute top-0 left-0 h-full w-1/3 bg-[#FACC15] animate-[shimmer_2s_infinite]"></div>
+                            </div>
+                            <div class="absolute grid grid-cols-3 gap-2">
+                                <div class="w-8 h-8 border border-white/10 rounded-sm"></div>
+                                <div class="w-8 h-8 border border-white/10 rounded-sm bg-white/5"></div>
+                                <div class="w-8 h-8 border border-white/10 rounded-sm"></div>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-black/50 backdrop-blur px-2 py-1 border border-white/10 text-[10px] uppercase tracking-wider text-neutral-300">
+                            Workflow
+                        </div>
+                    </div>
+                    <h3 class="group-hover:text-[#FACC15] transition-colors text-xl font-medium text-white mb-2">Automation Pipeline</h3>
+                    <p class="text-sm text-neutral-400 font-light">A workflow that connects scripts, APIs and scheduling tools to automate content and tasks.</p>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-[16/9] bg-[#111] border border-white/10 overflow-hidden mb-6">
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <!-- Placeholder Visualization -->
+                        <div class="flex bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/f18c93fe-2750-4ba8-b352-2046ef28de3d_1600w.jpg)] bg-cover absolute top-0 right-0 bottom-0 left-0 items-center justify-center">
+                            <div class="border-dashed animate-[spin_10s_linear_infinite] w-24 h-24 border-white/20 border rounded-full"></div>
+                            <div class="absolute w-16 h-16 border border-white/10 rotate-45"></div>
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-black/50 backdrop-blur px-2 py-1 border border-white/10 text-[10px] uppercase tracking-wider text-neutral-300">
+                            Hardware
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-2 group-hover:text-[#FACC15] transition-colors">Robotics </h3>
+                    <p class="text-sm text-neutral-400 font-light">Neumerous robtics competitions at both a national and international level.</p>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-[16/9] bg-[#111] border border-white/10 overflow-hidden mb-6">
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <!-- Placeholder Visualization -->
+                        <div class="flex bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/5e266a54-8d38-42f0-9c2b-18e977170882_1600w.png)] bg-cover absolute top-0 right-0 bottom-0 left-0 gap-x-1 gap-y-1 items-center justify-center">
+                            <div class="w-2 h-12 bg-white/10"></div>
+                            <div class="w-2 h-8 bg-[#FACC15]"></div>
+                            <div class="w-2 h-16 bg-white/10"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="scan-line" class="lucide lucide-scan-line absolute text-neutral-600 w-12 h-12 stroke-[1]"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><path d="M7 12h10"></path></svg>
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-black/50 backdrop-blur px-2 py-1 border border-white/10 text-[10px] uppercase tracking-wider text-neutral-300">
+                            AI / CV
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-2 group-hover:text-[#FACC15] transition-colors">Computer Vision Demo</h3>
+                    <p class="text-sm text-neutral-400 font-light">A prototype that uses computer vision to detect or sort objects.</p>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="group cursor-pointer">
+                    <div class="relative aspect-[16/9] bg-[#111] border border-white/10 overflow-hidden mb-6">
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <!-- Placeholder Visualization -->
+                        <div class="flex flex-col bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/ec854e74-22c4-4a7c-b103-e9bd2545c9b8_1600w.jpg)] bg-cover bg-center absolute top-0 right-0 bottom-0 left-0 gap-x-2 gap-y-2 items-center justify-center">
+                            <div class="w-32 h-2 bg-white/10 rounded-full"></div>
+                            <div class="w-24 h-2 bg-white/10 rounded-full"></div>
+                            <div class="w-28 h-2 bg-white/5 rounded-full"></div>
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-black/50 backdrop-blur px-2 py-1 border border-white/10 text-[10px] uppercase tracking-wider text-neutral-300">
+                            Web
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-medium text-white mb-2 group-hover:text-[#FACC15] transition-colors">Portfolio / Web Build</h3>
+                    <p class="text-sm text-neutral-400 font-light">A clean custom website to showcase projects and experiments.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="bg-center z-10 border-white/5 border-t pt-24 pb-24 relative [--fx-filter:blur(10px)_liquid-glass(3.6,10)_saturate(1.25)_noise(0.5,1,0)]">
+        <div class="max-w-screen-xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 animate-on-scroll">
+                <div class="md:col-span-4">
+                    <h2 class="text-2xl font-medium text-white tracking-tight">What I Can Help With</h2>
+                </div>
+                <div class="md:col-span-8 space-y-8">
+                    
+                    <!-- Item 1 -->
+                    <div class="flex gap-6 group">
+                        <div class="shrink-0 mt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="monitor" class="lucide lucide-monitor text-neutral-500 group-hover:text-[#FACC15] transition-colors w-5 h-5 stroke-[1.5]"><rect width="20" height="14" x="2" y="3" rx="2"></rect><line x1="8" x2="16" y1="21" y2="21"></line><line x1="12" x2="12" y1="17" y2="21"></line></svg>
+                        </div>
+                        <div class="">
+                            <h3 class="text-base font-medium text-white mb-1">Websites &amp; Front-End</h3>
+                            <p class="text-sm text-neutral-400 font-light">Simple, focused sites built to be fast and clear.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="flex group gap-x-6 gap-y-6">
+                        <div class="shrink-0 mt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="zap" class="lucide lucide-zap text-neutral-500 group-hover:text-[#FACC15] transition-colors w-5 h-5 stroke-[1.5]"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
+                        </div>
+                        <div class="">
+                            <h3 class="text-base font-medium text-white mb-1">Automation &amp; Tools</h3>
+                            <p class="text-sm text-neutral-400 font-light">Scripts and workflows that remove repetitive tasks.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="flex gap-6 group gap-x-6 gap-y-6">
+                        <div class="shrink-0 mt-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="box" class="lucide lucide-box text-neutral-500 group-hover:text-[#FACC15] transition-colors w-5 h-5 stroke-[1.5]"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg>
+                        </div>
+                        <div class="">
+                            <h3 class="text-base font-medium text-white mb-1">Prototyping &amp; Engineering</h3>
+                            <p class="text-sm text-neutral-400 font-light">Rapid prototyping using code, electronics and 3D printing.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    
+                
+                
+            
+                
+                
+            
+                
+                
+            
+                
+                
+            </section>
+
+    <!-- Contact Section -->
+    <footer class="overflow-hidden bg-center z-10 bg-[#050505] bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/fb158590-9b46-4a1d-b6a6-869fe22092db_3840w.webp)] bg-cover border-white/5 border-t pt-32 pb-32 relative" id="contact">
+        <!-- Background effect -->
+        <div class="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#111] to-transparent opacity-50 pointer-events-none"></div>
+        
+        <div class="md:px-12 animate-on-scroll text-center max-w-screen-xl mr-auto ml-auto pr-6 pl-6">
+            <div class="beam-border-v" style="left: 50%;"></div>
+
+            <h2 class="text-4xl md:text-6xl font-medium text-white tracking-tight mb-8">Contact</h2>
+            <p class="text-lg font-light text-gray-50 mb-12">
+                If you’d like to talk about a project or idea, feel free to reach out.
+            </p>
+            
+            <!-- Floating Email Pill -->
+            <div class="inline-flex items-center bg-white/5 border border-white/10 rounded-full p-1.5 pl-6 pr-2 backdrop-blur-md hover:bg-white/10 transition-all group hover:border-[#FACC15]/50 hover:shadow-[0_0_30px_-10px_rgba(250,204,21,0.3)]">
+                <span class="text-sm text-white font-mono mr-4 tracking-tight">maxwhulme@gmail.com</span>
+                <a href="mailto:maxwhulme@gmail.com" class="w-8 h-8 bg-white text-black rounded-full flex items-center justify-center group-hover:bg-[#FACC15] transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" class="lucide lucide-arrow-right w-4 h-4 stroke-[2]"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                </a>
+            </div>
+
+            <div class="mt-32 flex justify-between items-center text-[10px] uppercase tracking-widest text-neutral-600 font-medium">
+                <span class="">© 2024 Max Hulme</span>
+                <span>London, UK</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Intersection Observer for Fade In Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body></html>
